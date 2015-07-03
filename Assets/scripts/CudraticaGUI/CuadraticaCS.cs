@@ -12,7 +12,7 @@ public class CuadraticaCS : MonoBehaviour {
 	public float a;
 	public float b;
 	public float c;
-	public Vector2[] preguntas1;
+	public float d;
 	public int ladoDelVertice;
 	public int cantidadDeInterceptos;
 	StreamReader sr;
@@ -21,7 +21,12 @@ public class CuadraticaCS : MonoBehaviour {
 	string file = "file2.txt";
 	public int tBaseDatos;
 	public bool resultado;
+	public InputField valorDeA;
 	public InputField valorDeB;
+	public InputField valorDeC;
+	public InputField valorDeCrecimiento;
+	public Text botonA;
+	public Text botonB;
 	public Text Repuesta;
 	public UnityEngine.UI.Image fondoRta;
 	public bool[] preguntas;
@@ -31,6 +36,7 @@ public class CuadraticaCS : MonoBehaviour {
 	public GameObject[] coordenadasPlano;
 	public GameObject camara;
 	public GameObject vertice;
+	public Text TutuloProblema;
 	public Text marcador;
 	public Text marcadorCorrectas;
 	public int cantidadPregunta;
@@ -44,7 +50,9 @@ public class CuadraticaCS : MonoBehaviour {
 	public Image cantidadInterseptos;
 	public Image ladoVertice;
 	public Text marcadorFinal;
-
+	public string[] animales; 
+	public string[] indCantidad; 
+	public GameObject[] respondido; 
 	// Use this for initialization
 	void Awake () {
 //		scCurva = GameObject.Find ("Curva").GetComponent<crearCurva2>();
@@ -57,8 +65,6 @@ public class CuadraticaCS : MonoBehaviour {
 //			//Debug.Log(palabra);
 //			string[] entries = palabra.Split(',');
 //			if (entries.Length > 0){
-//				preguntas1[i].x = float.Parse(entries[0]);
-//				preguntas1[i].y = float.Parse(entries[1]);
 //			}
 //		}
 //		sr.Close ();
@@ -80,117 +86,122 @@ public class CuadraticaCS : MonoBehaviour {
 	public void validarRespuesta () {
 	
 		camara.transform.localPosition = new Vector3(0,0,-10);
-		b = float.Parse(valorDeB.text);		
-		coordenadasPlano[1].SetActive(false);
-		coordenadasPlano[0].SetActive(false);
-		//botonResponder.gameObject.SetActive(true);
+
 		resultado = true; 
-		bool banderaIntersepto = false;
-		bool banderaVertice = false;
-		if (b==0){
+
+		if(!(a==float.Parse(valorDeA.text)&&b==float.Parse(valorDeB.text)&&c==float.Parse(valorDeC.text))){
 			resultado = false; 
 		}
-		if((-b/(2*a))<0){                    // si es negativo en x 
-			if ( ladoDelVertice!= 0){ // izquierda != izquierda
-				resultado = false; 
-				Repuesta.text = "Incorrecto"; 
-				ladoVertice.gameObject.SetActive(true);
 
-				ladoVertice.sprite = IMGladoVertice[1];
-				coordenadasPlano[1].SetActive(true);
-				coordenadasPlano[0].SetActive(false);
-				banderaVertice = true;
-			}else{
-				coordenadasPlano[0].SetActive(true);
-				coordenadasPlano[1].SetActive(false);
-			}
-
-		}
-		if((-b/(2*a))>0){            // si es positivo en x 
-			if ( ladoDelVertice!= 1){ // derecha 
-				resultado = false;
-				Repuesta.text = "Incorrecto"; 
-				ladoVertice.gameObject.SetActive(true);
-
-				ladoVertice.sprite = IMGladoVertice[0];
-				coordenadasPlano[0].SetActive(true);
-				coordenadasPlano[1].SetActive(false);
-				banderaVertice = true;
-			}else{
-				coordenadasPlano[1].SetActive(true);				
-				coordenadasPlano[0].SetActive(false);				
-			}
-
-		}
+//		coordenadasPlano[1].SetActive(false);
+//		coordenadasPlano[0].SetActive(false);
+//		//botonResponder.gameObject.SetActive(true);
+//		bool banderaIntersepto = false;
+//		bool banderaVertice = false;
+//		if (b==0){
+//			resultado = false; 
+//		}
+//		if((-b/(2*a))<0){                    // si es negativo en x 
+//			if ( ladoDelVertice!= 0){ // izquierda != izquierda
+//				resultado = false; 
+//				Repuesta.text = "Incorrecto"; 
+//				ladoVertice.gameObject.SetActive(true);
+//
+//				ladoVertice.sprite = IMGladoVertice[1];
+//				coordenadasPlano[1].SetActive(true);
+//				coordenadasPlano[0].SetActive(false);
+//				banderaVertice = true;
+//			}else{
+//				coordenadasPlano[0].SetActive(true);
+//				coordenadasPlano[1].SetActive(false);
+//			}
+//
+//		}
+//		if((-b/(2*a))>0){            // si es positivo en x 
+//			if ( ladoDelVertice!= 1){ // derecha 
+//				resultado = false;
+//				Repuesta.text = "Incorrecto"; 
+//				ladoVertice.gameObject.SetActive(true);
+//
+//				ladoVertice.sprite = IMGladoVertice[0];
+//				coordenadasPlano[0].SetActive(true);
+//				coordenadasPlano[1].SetActive(false);
+//				banderaVertice = true;
+//			}else{
+//				coordenadasPlano[1].SetActive(true);				
+//				coordenadasPlano[0].SetActive(false);				
+//			}
+//
+//		}
 
 		
-		if(((b*b)-(4*a*c))<0){   //si tiene cero interceptos 
-			if (cantidadDeInterceptos != 0){ // cero interceptos 
-				resultado = false;
-				if (cantidadDeInterceptos == 1){	
-					Repuesta.text = "Incorrecto"; 
-					cantidadInterseptos.gameObject.SetActive(true);	
-					cantidadInterseptos.sprite = IMGcantidadInterseptos[1];
-					banderaIntersepto = true;
-				}
-				if (cantidadDeInterceptos == 2){
-					Repuesta.text = "Incorrecto"; 
-					cantidadInterseptos.gameObject.SetActive(true);	
-					cantidadInterseptos.sprite = IMGcantidadInterseptos[2];
-					banderaIntersepto = true;
-				}
-			}
-		}
-		if(((b*b)-(4*a*c))==0) {
-			if (cantidadDeInterceptos != 1){ // un interceptos 
-				resultado = false;
-				if (cantidadDeInterceptos == 0){	
-					Repuesta.text = "Incorrecto";
-					cantidadInterseptos.gameObject.SetActive(true);	
-					cantidadInterseptos.sprite = IMGcantidadInterseptos[0];
-					banderaIntersepto = true;
-				}
-				if (cantidadDeInterceptos == 2){
-					Repuesta.text = "Incorrecto"; 					
-					cantidadInterseptos.gameObject.SetActive(true);	
-					cantidadInterseptos.sprite = IMGcantidadInterseptos[2];
-					banderaIntersepto = true;
-				}
-			}
-		}
-		if(((b*b)-(4*a*c))>0) {
-			if (cantidadDeInterceptos != 2){ // dos interceptos 
-				resultado = false;
-				if (cantidadDeInterceptos == 1){	
-					Repuesta.text = "Incorrecto"; 		
-					cantidadInterseptos.gameObject.SetActive(true);	
-					cantidadInterseptos.sprite = IMGcantidadInterseptos[1];
-					banderaIntersepto = true;
-				}
-				if (cantidadDeInterceptos == 0){
-					Repuesta.text = "Incorrecto"; 
-					cantidadInterseptos.gameObject.SetActive(true);	
-
-					cantidadInterseptos.sprite = IMGcantidadInterseptos[0];	
-					banderaIntersepto = true;
-				}
-			}
-		}
-		if(!banderaIntersepto){
-			cantidadInterseptos.gameObject.SetActive(false);
-		}
-		if(!banderaVertice){
-			ladoVertice.gameObject.SetActive(false);
-		}
-		if(banderaIntersepto&&banderaVertice ){
-			Repuesta.text = "La respuesta fue incorrecta ya que fallaste en aplicar las siguientes fórmulas correctamente.";
-		}
-		if(banderaIntersepto&&!banderaVertice ){
-			Repuesta.text = "La respuesta fue incorrecta ya que fallaste en aplicar la siguiente fórmula correctamente.";
-		}
-		if(!banderaIntersepto&&banderaVertice ){
-			Repuesta.text = "La respuesta fue incorrecta ya que fallaste en aplicar la siguiente fórmula correctamente.";
-		}
+//		if(((b*b)-(4*a*c))<0){   //si tiene cero interceptos 
+//			if (cantidadDeInterceptos != 0){ // cero interceptos 
+//				resultado = false;
+//				if (cantidadDeInterceptos == 1){	
+//					Repuesta.text = "Incorrecto"; 
+//					cantidadInterseptos.gameObject.SetActive(true);	
+//					cantidadInterseptos.sprite = IMGcantidadInterseptos[1];
+//					banderaIntersepto = true;
+//				}
+//				if (cantidadDeInterceptos == 2){
+//					Repuesta.text = "Incorrecto"; 
+//					cantidadInterseptos.gameObject.SetActive(true);	
+//					cantidadInterseptos.sprite = IMGcantidadInterseptos[2];
+//					banderaIntersepto = true;
+//				}
+//			}
+//		}
+//		if(((b*b)-(4*a*c))==0) {
+//			if (cantidadDeInterceptos != 1){ // un interceptos 
+//				resultado = false;
+//				if (cantidadDeInterceptos == 0){	
+//					Repuesta.text = "Incorrecto";
+//					cantidadInterseptos.gameObject.SetActive(true);	
+//					cantidadInterseptos.sprite = IMGcantidadInterseptos[0];
+//					banderaIntersepto = true;
+//				}
+//				if (cantidadDeInterceptos == 2){
+//					Repuesta.text = "Incorrecto"; 					
+//					cantidadInterseptos.gameObject.SetActive(true);	
+//					cantidadInterseptos.sprite = IMGcantidadInterseptos[2];
+//					banderaIntersepto = true;
+//				}
+//			}
+//		}
+//		if(((b*b)-(4*a*c))>0) {
+//			if (cantidadDeInterceptos != 2){ // dos interceptos 
+//				resultado = false;
+//				if (cantidadDeInterceptos == 1){	
+//					Repuesta.text = "Incorrecto"; 		
+//					cantidadInterseptos.gameObject.SetActive(true);	
+//					cantidadInterseptos.sprite = IMGcantidadInterseptos[1];
+//					banderaIntersepto = true;
+//				}
+//				if (cantidadDeInterceptos == 0){
+//					Repuesta.text = "Incorrecto"; 
+//					cantidadInterseptos.gameObject.SetActive(true);	
+//
+//					cantidadInterseptos.sprite = IMGcantidadInterseptos[0];	
+//					banderaIntersepto = true;
+//				}
+//			}
+//		}
+//		if(!banderaIntersepto){
+//			cantidadInterseptos.gameObject.SetActive(false);
+//		}
+//		if(!banderaVertice){
+//			ladoVertice.gameObject.SetActive(false);
+//		}
+//		if(banderaIntersepto&&banderaVertice ){
+//			Repuesta.text = "La respuesta fue incorrecta ya que fallaste en aplicar las siguientes fórmulas correctamente.";
+//		}
+//		if(banderaIntersepto&&!banderaVertice ){
+//			Repuesta.text = "La respuesta fue incorrecta ya que fallaste en aplicar la siguiente fórmula correctamente.";
+//		}
+//		if(!banderaIntersepto&&banderaVertice ){
+//			Repuesta.text = "La respuesta fue incorrecta ya que fallaste en aplicar la siguiente fórmula correctamente.";
+//		}
 
 
 			if(resultado){ // si pasa
@@ -214,6 +225,7 @@ public class CuadraticaCS : MonoBehaviour {
 			objetosAHabilitar[i].SetActive (!false);
 		}
 		scCurva.cambiarGrafica (a,b,c);
+		generarPregunta ();
 			//c = c/16.6666667;  			
 	}
 
@@ -236,40 +248,60 @@ public class CuadraticaCS : MonoBehaviour {
 		for(int i =0; i< objetosAHabilitar.Length;i++){
 			objetosAHabilitar[i].SetActive (false);
 		}
+		valorDeA.text = "";
 		valorDeB.text = "";
-		aleatorio = Random.Range(0, preguntas1.Length);
-		a = preguntas1[aleatorio].x;
-		c = preguntas1[aleatorio].y;
+		valorDeC.text = "";
+		valorDeCrecimiento.text = "";
+		respondido[0].SetActive(false);
+		respondido[1].SetActive(false);
 		//if (float.TryParse(stringToEdit, b));// print ("Succeeded, and the result is " + b);
 		//c = Random.Range(0.72, 0);
-		ladoDelVertice = Random.Range(0, 2);
-		textoProblema.text = "Sea <b><i>f(X)=<color=#008000ff>a</color>x²+"
-			+"<color=#0000ffff>b</color>x+"
-				+"<color=#ffa500ff>c</color></i></b>"
-				+"\nDados <b><i><color=#008000ff>a</color></i></b>="+a+" y <b><i><color=#ffa500ff>c</color></i></b>="+c+","
-				+" encuentre un valor de <b><i><color=#0000ffff>b</color></i></b> tal que el vértice de la"
-				+" parábola esté a la ";
+
+		TutuloProblema.text = "Pregunta "+cantidadPregunta;
+
+		string[] textos = new string[4];
+		string textoAleatorio = animales[Random.Range(0,3)];
+		textos[0]="Una población de "+textoAleatorio+",";
+		int	ramdonValue = Random.Range(2,20);
+		botonA.text = "¿Cuál es la fórmula de la función que representa el crecimiento de la población de "+textoAleatorio+"?";
+		botonB.text = "¿Que cantidad de "+textoAleatorio+" hay después de "+ ramdonValue +" años?";
+		d = ramdonValue;
+		ramdonValue = Random.Range(2,100);
+		textos[1]=" tiene una población inicial de "+ramdonValue+" individuos";
+		a = ramdonValue;
+		ramdonValue = Random.Range(0,5);
+		b = ramdonValue+2;
+		textoAleatorio = indCantidad[ramdonValue];
+		textos[2]=" se "+textoAleatorio;
+		ramdonValue = Random.Range(2,50);
+		c = ramdonValue;
+		textos[3]=" cada "+ramdonValue+" años";
 		
-		if (ladoDelVertice == 0){
-			textoProblema.text = textoProblema.text + "<b>izquierda </b>"; // el ramdom es cero esta a la derecha.
-		}else{
-			textoProblema.text = textoProblema.text + "<b>derecha </b>"; // el ramdom es cero esta a la derecha.
-		}
-		if ( ladoDelVertice!= 0){ // izquierda != izquierda
-			coordenadasPlano[1].SetActive(true);
-			coordenadasPlano[0].SetActive(false);
-		}else{
-			coordenadasPlano[0].SetActive(true);
-			coordenadasPlano[1].SetActive(false);
-		}
-		cantidadDeInterceptos = Random.Range(0, 3);
-		textoProblema.text = textoProblema.text 
-			+"del eje <b><i>y</i></b>, que tenga <b>"+cantidadDeInterceptos+"</b> interceptos con el "
-				+"eje <b>x</b>"
-				//+" <b><i><color=#008000ff>a</color></i></b> = "+a
-				//+" <b><i><color=#0000ffff>b</color></i></b> = ?"
-				//+" <b><i><color=#ffa500ff>c</color></i></b> = "+c
-				;
+		
+		textoProblema.text = textos[0];
+		int j =0; 
+		int[] repetido = new int[3];
+
+		ramdonValue = Random.Range(0,2);
+				
+			if(ramdonValue==0){
+				textoProblema.text= textoProblema.text+ textos[1];
+				ramdonValue = Random.Range(0,2);
+				if(ramdonValue==0){
+					textoProblema.text= textoProblema.text +" y"+ textos[2]+textos[3]+".";
+				}else{
+					textoProblema.text= textoProblema.text +" y"+ textos[3]+textos[2]+".";
+				}
+			}else{
+				ramdonValue = Random.Range(0,2);
+				if(ramdonValue==0){
+					textoProblema.text= textoProblema.text + textos[2]+textos[3];
+				}else{
+					textoProblema.text= textoProblema.text + textos[3]+textos[2];
+				}
+				textoProblema.text= textoProblema.text+" y"+ textos[1]+".";
+			}
+
 			marcador.text = "Pregunta("+cantidadPregunta+"/"+limitePreguntas+")";
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/"+(cantidadPregunta-1)+")";
 			cantidadPregunta++;
