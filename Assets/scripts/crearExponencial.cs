@@ -11,7 +11,8 @@ public class crearExponencial : MonoBehaviour {
 	public float desde	= 0;
 	public float hasta	= 0;
 	public ViewDrag detener;
-
+	public Indicadores exponent;
+	public bool banderaExp;
 
 	void Start () 
 	{
@@ -28,8 +29,8 @@ public class crearExponencial : MonoBehaviour {
 	
 	public float f(float x)
 	{
-		return((a*Mathf.Exp(b*x)));
 
+		return(a * Mathf.Pow(b, (c * x)));
 		//return((Mathf.Sin (a + b*x/10))*100);
 	}
 	
