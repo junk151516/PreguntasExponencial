@@ -128,6 +128,13 @@ public class CuadraticaCS : MonoBehaviour {
 	}
 
 	public void validarRespuesta1 (){
+
+		if(valorDeA.text == "" || valorDeB.text == ""  || valorDeC.text == "" ){
+			validador1.sprite = incorrecto;
+			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
+
+		}else{
+
 		if (!(a == float.Parse (valorDeA.text) && b == float.Parse (valorDeB.text) && c == float.Parse (valorDeC.text))) {
 			validador1.sprite = incorrecto;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
@@ -135,14 +142,16 @@ public class CuadraticaCS : MonoBehaviour {
 			validador1.sprite = correcto;
 			contadorCorrectas++;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
-
+		}
 		}
 	}
 
 	public void validarRespuesta2 (){
-		Debug.Log ((a * Mathf.Pow(b, (c * d))));
-
-		if ((a * Mathf.Pow(b, (c * d))) == float.Parse (valorDeCrecimiento.text)) {
+		if (valorDeCrecimiento.text == "") {
+			validador2.sprite = incorrecto;
+			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
+		} else {	
+			if ((a * Mathf.Pow(b, (c * d))) == float.Parse (valorDeCrecimiento.text)) {
 			validador2.sprite = correcto;
 			contadorCorrectas++;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
@@ -150,6 +159,7 @@ public class CuadraticaCS : MonoBehaviour {
 		} else {
 			validador2.sprite = incorrecto;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
+			}
 		}
 	}
 	public void generarPregunta () {
