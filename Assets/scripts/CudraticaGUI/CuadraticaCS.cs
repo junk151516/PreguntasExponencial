@@ -59,6 +59,7 @@ public class CuadraticaCS : MonoBehaviour {
 	public bool respondio2 = false;
 	public GameObject fondoPregunta1;
 	public GameObject fondoPregunta2;
+	public GameObject infoError;
 	// Use this for initialization
 	void Awake () {
 		//scCurva = GameObject.Find ("Curva").GetComponent<crearExponencial>();
@@ -92,17 +93,23 @@ public class CuadraticaCS : MonoBehaviour {
 
 	public void validarRespuesta () {
 	
-		camara.transform.localPosition = new Vector3(0,0,-10);
+		camara.transform.localPosition = new Vector3 (0, 0, -10);
+		//respondido 
+		if (respondio1 && respondio2) {
 
-		for(int i =0; i< objetosADeshabilitar.Length;i++){
-			objetosADeshabilitar[i].SetActive (false);
+		
+			for (int i =0; i< objetosADeshabilitar.Length; i++) {
+				objetosADeshabilitar [i].SetActive (false);
+			}
+			for (int i =0; i< objetosAHabilitar.Length; i++) {
+				objetosAHabilitar [i].SetActive (!false);
+			}
+			scCurva.cambiarGrafica (a, b, c);
+			generarPregunta ();
+		} else {
+			infoError.SetActive(true);
 		}
-		for(int i =0; i< objetosAHabilitar.Length;i++){
-			objetosAHabilitar[i].SetActive (!false);
-		}
-		scCurva.cambiarGrafica (a,b,c);
-		generarPregunta ();
-			//c = c/16.6666667;  			
+
 	}
 
 	public void HabilitaRta(UnityEngine.UI.Image objecto) {
@@ -242,14 +249,14 @@ public class CuadraticaCS : MonoBehaviour {
 	public void generarMarcadorFinal () {
 		ObjetoMarcadorFinal.SetActive(true);
 		marcadorFinal.text = "Puntaje ("+contadorCorrectas+"/20)";
-		if(contadorCorrectas>=limitePreguntas-1){
+		if(contadorCorrectas>=(limitePreguntas*2)-1){
 			IndicadorResultado.text="Excelente, has comprendido el tema a la perfección.";
 
 			medalla[0].SetActive(true);
 			medalla[1].SetActive(false);
 			medalla[2].SetActive(false);
 		}else{
-			if(contadorCorrectas<=limitePreguntas-1&&contadorCorrectas>(limitePreguntas/3)){
+			if(contadorCorrectas<=(limitePreguntas*2)-1&&contadorCorrectas>((limitePreguntas*2)/3)){
 				IndicadorResultado.text="Aunque comprendes los temas te falta algo de repaso, revisa bien en que estas fallando y vuelve a poner a prueba tus conocimientos.";
 				medalla[0].SetActive(false);
 				medalla[1].SetActive(true);
