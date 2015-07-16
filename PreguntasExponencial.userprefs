@@ -1,8 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CudraticaGUI\CuadraticaCS.cs">
     <Files>
-      <File FileName="Assets\scripts\CudraticaGUI\CuadraticaCS.cs" Line="110" Column="8" />
+      <File FileName="Assets\scripts\CudraticaGUI\CuadraticaCS.cs" Line="259" Column="84" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
