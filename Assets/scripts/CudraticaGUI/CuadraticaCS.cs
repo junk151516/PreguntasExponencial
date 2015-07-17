@@ -193,13 +193,13 @@ public class CuadraticaCS : MonoBehaviour {
 		TutuloProblema.text = "Pregunta "+cantidadPregunta;
 
 		string[] textos = new string[4];
-		string textoAleatorio = animales[Random.Range(0,3)];
-		textos[0]="Una población de "+textoAleatorio+",";
+		string textoAleatorio = animales[Random.Range(0,animales.Length)];
+		textos[0]="Un grupo de "+textoAleatorio+",";
 		int	ramdonValue = Random.Range(1,6);
-		botonA.text = "¿Cuál es la fórmula de la función que representa el crecimiento de la población de "+textoAleatorio+"?";
+		botonA.text = "¿Cuál es la fórmula que representa el modelo de crecimiento e n el tiempo de la población de "+textoAleatorio+"?";
 		//botonB.text = "¿cuánta cantidad de "+textoAleatorio+" hay a los "+ ramdonValue +" años?";
 		//d = ramdonValue;
-		botonB.text = "¿cuánta cantidad de "+textoAleatorio+" hay despues de un año?";
+		botonB.text = "¿cual es la cantidad de "+textoAleatorio+" hay despues de un año?";
 		d = 1;
 		ramdonValue = Random.Range(2,50);
 		textos[1]=" tiene una población inicial de "+ramdonValue+" individuos";
