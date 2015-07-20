@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CudraticaGUI\CuadraticaCS.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\crearExponencial.cs">
     <Files>
-      <File FileName="Assets\scripts\CudraticaGUI\CuadraticaCS.cs" Line="259" Column="84" />
+      <File FileName="..\..\..\Desktop\PreguntasCuadratica-master\Assets\scripts\crearCurva2.cs" Line="42" Column="2" />
+      <File FileName="Assets\scripts\crearExponencial.cs" Line="65" Column="2" />
+      <File FileName="Assets\scripts\CudraticaGUI\CuadraticaCS.cs" Line="181" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

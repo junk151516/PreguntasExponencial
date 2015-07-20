@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class CuadraticaCS : MonoBehaviour {
 
-	public Text textoProblema;
+	public Text[] textoProblema;
 	public int aleatorio;
 	public float a;
 	public float b;
@@ -54,12 +54,20 @@ public class CuadraticaCS : MonoBehaviour {
 	public Sprite correcto;
 	public Sprite incorrecto;
 	public Image validador1;
+	public Image validadorRetroalimentacion;
 	public Image validador2;
 	public bool respondio1 = false;
 	public bool respondio2 = false;
 	public GameObject fondoPregunta1;
 	public GameObject fondoPregunta2;
 	public GameObject infoError;
+
+	public Text ValorA;
+	public Text ValorB;
+	public Text ValorC;
+	public Text ValorA1;
+	public Text ValorB1;
+	public Text ValorC1;
 	// Use this for initialization
 	void Awake () {
 		//scCurva = GameObject.Find ("Curva").GetComponent<crearExponencial>();
@@ -135,18 +143,30 @@ public class CuadraticaCS : MonoBehaviour {
 	}
 
 	public void validarRespuesta1 (){
+		ValorA.text = a+"";
+		ValorB.text = b+"";
+		ValorC.text = c+"";
+
+		ValorA1.text = valorDeA.text;
+		ValorB1.text = valorDeB.text;
+		ValorC1.text = valorDeC.text;
+
 
 		if(valorDeA.text == "" || valorDeB.text == ""  || valorDeC.text == "" ){
+
 			validador1.sprite = incorrecto;
+			validadorRetroalimentacion.sprite = incorrecto;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 
 		}else{
 
 		if (!(a == float.Parse (valorDeA.text) && b == float.Parse (valorDeB.text) && c == float.Parse (valorDeC.text))) {
 			validador1.sprite = incorrecto;
+			validadorRetroalimentacion.sprite = incorrecto;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 		} else {
 			validador1.sprite = correcto;
+			validadorRetroalimentacion.sprite = correcto;
 			contadorCorrectas++;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 		}
@@ -196,7 +216,7 @@ public class CuadraticaCS : MonoBehaviour {
 		string textoAleatorio = animales[Random.Range(0,animales.Length)];
 		textos[0]="Un grupo de "+textoAleatorio+",";
 		int	ramdonValue = Random.Range(1,6);
-		botonA.text = "¿Cuál es la fórmula que representa el modelo de crecimiento e n el tiempo de la población de "+textoAleatorio+"?";
+		botonA.text = "¿Cuál es la fórmula que representa el modelo de crecimiento en el tiempo de la población de "+textoAleatorio+"?";
 		//botonB.text = "¿cuánta cantidad de "+textoAleatorio+" hay a los "+ ramdonValue +" años?";
 		//d = ramdonValue;
 		botonB.text = "¿cual es la cantidad de "+textoAleatorio+" hay despues de un año?";
@@ -213,30 +233,32 @@ public class CuadraticaCS : MonoBehaviour {
 		textos[3]=" cada "+ramdonValue+" años";
 		
 		
-		textoProblema.text = textos[0];
+		textoProblema[0].text = textos[0];
 		int j =0; 
 		int[] repetido = new int[3];
 
 		ramdonValue = Random.Range(0,2);
 				
 			if(ramdonValue==0){
-				textoProblema.text= textoProblema.text+ textos[1];
+				textoProblema[0].text= textoProblema[0].text+ textos[1];
 				ramdonValue = Random.Range(0,2);
 				if(ramdonValue==0){
-					textoProblema.text= textoProblema.text +" y"+ textos[2]+textos[3]+".";
+					textoProblema[0].text= textoProblema[0].text +" y"+ textos[2]+textos[3]+".";
 				}else{
-					textoProblema.text= textoProblema.text +" y"+ textos[3]+textos[2]+".";
+					textoProblema[0].text= textoProblema[0].text +" y"+ textos[3]+textos[2]+".";
 				}
 			}else{
 				ramdonValue = Random.Range(0,2);
 				if(ramdonValue==0){
-					textoProblema.text= textoProblema.text + textos[2]+textos[3];
+					textoProblema[0].text= textoProblema[0].text + textos[2]+textos[3];
 				}else{
-					textoProblema.text= textoProblema.text + textos[3]+textos[2];
+					textoProblema[0].text= textoProblema[0].text + textos[3]+textos[2];
 				}
-				textoProblema.text= textoProblema.text+" y"+ textos[1]+".";
+				textoProblema[0].text= textoProblema[0].text+" y"+ textos[1]+".";
 			}
-
+			
+			textoProblema[1].text = textoProblema[0].text;
+			textoProblema[2].text = textoProblema[0].text;
 			marcador.text = "Pregunta("+cantidadPregunta+"/"+limitePreguntas+")";
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 			cantidadPregunta++;

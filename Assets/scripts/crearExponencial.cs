@@ -13,6 +13,9 @@ public class crearExponencial : MonoBehaviour {
 	public ViewDrag detener;
 	public Indicadores exponent;
 	public bool banderaExp;
+	public GameObject intersepto;
+	public GameObject alAño;
+
 
 	void Start () 
 	{
@@ -45,6 +48,9 @@ public class crearExponencial : MonoBehaviour {
 		//((-b+(Mathf.Sqrt ((b*b)-(4*a*c))))/(2*a));
 
 		//(Mathf.Sqrt (b*b-(4*a*c))) ;
+		intersepto.transform.localPosition = new Vector3(0,a,0);
+		alAño.transform.localPosition = new Vector3(1,(a * Mathf.Pow(b,c)),0);
+
 
 		float espacio;
 		float npun = puntos + 0.0f;
