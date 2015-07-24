@@ -61,13 +61,16 @@ public class CuadraticaCS : MonoBehaviour {
 	public GameObject fondoPregunta1;
 	public GameObject fondoPregunta2;
 	public GameObject infoError;
-
+	public Image validador3;
 	public Text ValorA;
 	public Text ValorB;
 	public Text ValorC;
 	public Text ValorA1;
 	public Text ValorB1;
 	public Text ValorC1;
+	public Text ValorXEsperado;
+	public Text ValorXResultado;
+
 	// Use this for initialization
 	void Awake () {
 		//scCurva = GameObject.Find ("Curva").GetComponent<crearExponencial>();
@@ -174,17 +177,22 @@ public class CuadraticaCS : MonoBehaviour {
 	}
 
 	public void validarRespuesta2 (){
+		ValorXEsperado.text = (a * Mathf.Pow(b, (c * d)))+"";
+		ValorXResultado.text = valorDeCrecimiento.text;
 		if (valorDeCrecimiento.text == "") {
 			validador2.sprite = incorrecto;
+			validador3.sprite = incorrecto;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 		} else {	
 			if ((a * Mathf.Pow(b, (c * d))) == float.Parse (valorDeCrecimiento.text)) {
 			validador2.sprite = correcto;
+				validador3.sprite = correcto;
 			contadorCorrectas++;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 
 		} else {
 			validador2.sprite = incorrecto;
+				validador3.sprite = incorrecto;
 			marcadorCorrectas.text = "Correctas("+contadorCorrectas+"/20)";
 			}
 		}
