@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CudraticaGUI\CuadraticaCS.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\cambioDinamico\tamañoLetras2.cs">
     <Files>
-      <File FileName="Assets\scripts\CudraticaGUI\CuadraticaCS.cs" Line="199" Column="92" />
+      <File FileName="Assets\scripts\cambioDinamico\cambiarTamanoTexto.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\cambioDinamico\tamañoLetras2.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
