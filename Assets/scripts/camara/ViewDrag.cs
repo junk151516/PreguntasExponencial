@@ -67,22 +67,22 @@ public class ViewDrag : MonoBehaviour {
 
 		if(direction.x < 0 && derecha){	
 			camera_position.x = CamaraDelJuego.position.x;
-			Debug.Log ("derecha");
+			//Debug.Log ("derecha");
 			direction.x = 0;
 		}
 		if(direction.x > 0 && izquierda){
 			camera_position.x = CamaraDelJuego.position.x;
-			Debug.Log ("izquierda");
+			//Debug.Log ("izquierda");
 			direction.x = 0;
 		}
 		if(direction.y < 0 && arriba){
 			camera_position.y = CamaraDelJuego.position.y;
-			Debug.Log ("arriba");
+			//Debug.Log ("arriba");
 			direction.y = 0;
 		}
 		if(direction.y > 0 && abajo){
 			camera_position.y = CamaraDelJuego.position.y;
-			Debug.Log ("abajo");
+			//Debug.Log ("abajo");
 			direction.y = 0;
 		}
 

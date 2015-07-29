@@ -32,8 +32,12 @@ public class crearExponencial : MonoBehaviour {
 	
 	public float f(float x)
 	{
+		if((a * Mathf.Pow(b, (c * x)))>290){
+			return 300;
+		}else{
+			return(a * Mathf.Pow(b, (c * x)));
+		}
 
-		return(a * Mathf.Pow(b, (c * x)));
 		//return((Mathf.Sin (a + b*x/10))*100);
 	}
 	
